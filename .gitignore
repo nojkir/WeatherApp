@@ -14,5 +14,6 @@ gradle.properties
 .externalNativeBuild
 .cxx
 /app/src/main/res/values/api.key.xml
+app/src/main/java/pl/nojkir/weatherapp/ui/util/Constants.kt
 
 
