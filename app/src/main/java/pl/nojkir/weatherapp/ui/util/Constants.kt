@@ -12,6 +12,7 @@ class Constants {
     companion object {
         val BASE_URL = Resources.getSystem().getString(R.string.BASE_URL)
         val API_KEY = Resources.getSystem().getString(R.string.WEATHER_API_KEY)
-        val test = "Sprawdzam"
+        val test = "spraawdzam2"
+
     }
 }
