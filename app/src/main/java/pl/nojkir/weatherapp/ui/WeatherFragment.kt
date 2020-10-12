@@ -10,6 +10,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import pl.nojkir.weatherapp.R
 import pl.nojkir.weatherapp.databinding.FragmentWeatherBinding
 import pl.nojkir.weatherapp.ui.util.Resource
+import pl.nojkir.weatherapp.ui.util.setBackgroundResource
+import pl.nojkir.weatherapp.ui.util.setImageResource
 import pl.nojkir.weatherapp.ui.viewModels.CityWeatherViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,18 +23,6 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
     private var _binding: FragmentWeatherBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CityWeatherViewModel by viewModels()
-//    override fun onCreateView(
-//        inflater: LayoutInflater,
-//        container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        _binding = FragmentWeatherBinding.inflate(inflater, container, false)
-//
-//
-//        return binding.root
-//
-//
-//    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -55,8 +45,10 @@ class WeatherFragment : Fragment(R.layout.fragment_weather) {
                     binding.textViewPressure.text = response.data?.main?.pressure.toString()
                     binding.textViewWind.text = response.data?.wind?.speed.toString()
                     binding.textViewTemperature.text =
-                        response.data?.main?.temp?.let { Math.round(it).toString() } + " °C"
+                        response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
                     binding.textViewDescription.text = response.data?.weather?.get(0)?.description
+                    setImageResource(binding.imageViewWeatherIcon, response.data?.weather?.get(0)?.icon.toString())
+                    setBackgroundResource(binding.root,response.data?.weather?.get(0)?.icon.toString() )
 
                 }
             }
