@@ -15,8 +15,13 @@ class CityWeatherViewModel @ViewModelInject constructor(
     private val weatherRepository: WeatherRepository
 ) : ViewModel(){
 
+    var apiKey = "f180eb8998a971182830813353320521"
+    var units = "metric"
+    var language = "pl"
+    var cityName = "Chorzów"
+
     init {
-        getWeatherByCityName("Tokio","f180eb8998a971182830813353320521", "metric", "pl")
+        getWeatherByCityName(cityName, apiKey, units, language)
     }
 
     val weather : MutableLiveData<Resource<WeatherResponse>> = MutableLiveData()
