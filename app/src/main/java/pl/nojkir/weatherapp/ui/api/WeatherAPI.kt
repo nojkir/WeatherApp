@@ -11,7 +11,9 @@ interface WeatherAPI {
    suspend fun getWeatherByCityName(
         @Query("q") cityName: String,
         @Query("appid") apiKey: String,
+        @Query("units") units: String,
         @Query("lang") language: String)
+
             : Response<WeatherResponse>
 
 

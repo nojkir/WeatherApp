@@ -17,3 +17,4 @@ gradle.properties
 src/main/java/pl/nojkir/weatherapp/ui/util/Constants.kt
 
 
+/app/src/main/res/values/api_key.xml
