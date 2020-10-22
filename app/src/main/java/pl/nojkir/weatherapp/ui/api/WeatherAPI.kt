@@ -1,6 +1,6 @@
 package pl.nojkir.weatherapp.ui.api
 
-import pl.nojkir.weatherapp.models.CurrentWeatherResponse
+import pl.nojkir.weatherapp.models.currentWeather.CurrentWeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

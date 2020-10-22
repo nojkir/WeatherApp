@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import pl.nojkir.weatherapp.data.CurrentWeatherRepository
-import pl.nojkir.weatherapp.models.CurrentWeatherResponse
+import pl.nojkir.weatherapp.models.currentWeather.CurrentWeatherResponse
 import pl.nojkir.weatherapp.ui.util.Resource
 import retrofit2.Response
 

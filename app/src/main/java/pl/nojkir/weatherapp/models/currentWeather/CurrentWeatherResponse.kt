@@ -1,4 +1,4 @@
-package pl.nojkir.weatherapp.models
+package pl.nojkir.weatherapp.models.currentWeather
 
 data class CurrentWeatherResponse(
     val base: String,
