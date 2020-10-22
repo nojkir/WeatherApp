@@ -8,4 +8,8 @@
         android:id="@+id/weatherFragment"
         android:name="pl.nojkir.weatherapp.ui.WeatherFragment"
         android:label="WeatherFragment" />
+    <fragment
+        android:id="@+id/fiveDaysFragment"
+        android:name="pl.nojkir.weatherapp.ui.FiveDaysFragment"
+        android:label="FiveDaysFragment" />
 </navigation>
