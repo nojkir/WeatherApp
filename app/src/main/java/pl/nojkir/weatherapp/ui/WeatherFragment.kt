@@ -6,7 +6,6 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import im.delight.android.location.SimpleLocation
 import pl.nojkir.weatherapp.R
@@ -15,10 +14,9 @@ import pl.nojkir.weatherapp.ui.util.GpsUtility
 import pl.nojkir.weatherapp.ui.util.Resource
 import pl.nojkir.weatherapp.ui.util.setBackgroundResource
 import pl.nojkir.weatherapp.ui.util.setImageResource
-import pl.nojkir.weatherapp.ui.viewModels.CityCurrentWeatherViewModel
+import pl.nojkir.weatherapp.ui.viewModels.CurrentWeatherViewModel
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -32,7 +30,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
 
     private var _binding: FragmentWeatherBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: CityCurrentWeatherViewModel by viewModels()
+    private val viewModel: CurrentWeatherViewModel by viewModels()
     private lateinit var location: SimpleLocation
 
 

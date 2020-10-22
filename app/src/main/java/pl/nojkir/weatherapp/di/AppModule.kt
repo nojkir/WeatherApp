@@ -4,12 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import pl.nojkir.weatherapp.R
-import pl.nojkir.weatherapp.ui.api.WeatherAPI
-import pl.nojkir.weatherapp.ui.util.Constants
+import pl.nojkir.weatherapp.ui.api.CurrentWeatherAPI
+import pl.nojkir.weatherapp.ui.api.ForecastWeatherAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 
@@ -28,6 +26,14 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideWeatherApi(retrofit: Retrofit) : WeatherAPI =
-        retrofit.create(WeatherAPI::class.java)
+    fun provideWeatherApi(retrofit: Retrofit) : CurrentWeatherAPI =
+        retrofit.create(CurrentWeatherAPI::class.java)
+
+    @Provides
+    @Singleton
+
+    fun provideForecastApi(retrofit: Retrofit) : ForecastWeatherAPI =
+        retrofit.create(ForecastWeatherAPI:: class.java)
+
+
 }

@@ -1,4 +1,4 @@
-package pl.nojkir.weatherapp.models.dailyWeather
+package pl.nojkir.weatherapp.models.forecastWeather
 
 data class Weather(
     val description: String,

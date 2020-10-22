@@ -10,7 +10,8 @@ import pl.nojkir.weatherapp.R
 
 class Constants {
     companion object {
-        val BASE_URL = Resources.getSystem().getString(R.string.BASE_URL)
+        val CURRENT_WEATHER_BASE_URL = Resources.getSystem().getString(R.string.BASE_URL)
+        val FORECAST_WEATHER_BASE_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?"
         val API_KEY = Resources.getSystem().getString(R.string.WEATHER_API_KEY)
 
 

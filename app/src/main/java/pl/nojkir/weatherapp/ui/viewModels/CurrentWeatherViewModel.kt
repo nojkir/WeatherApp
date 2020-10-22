@@ -10,7 +10,7 @@ import pl.nojkir.weatherapp.models.currentWeather.CurrentWeatherResponse
 import pl.nojkir.weatherapp.ui.util.Resource
 import retrofit2.Response
 
-class CityCurrentWeatherViewModel @ViewModelInject constructor(
+class CurrentWeatherViewModel @ViewModelInject constructor(
     private val weatherRepository: CurrentWeatherRepository
 ) : ViewModel(){
 

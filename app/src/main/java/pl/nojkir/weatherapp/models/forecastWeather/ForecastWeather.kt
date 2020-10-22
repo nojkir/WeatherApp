@@ -1,6 +1,6 @@
-package pl.nojkir.weatherapp.models.dailyWeather
+package pl.nojkir.weatherapp.models.forecastWeather
 
-data class DailyWeather (
+data class ForecastWeather (
     val clouds: Int,
     val deg: Int,
     val dt: Int,
