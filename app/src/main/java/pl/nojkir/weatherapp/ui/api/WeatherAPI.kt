@@ -1,6 +1,6 @@
 package pl.nojkir.weatherapp.ui.api
 
-import pl.nojkir.weatherapp.models.WeatherResponse
+import pl.nojkir.weatherapp.models.CurrentWeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,8 +13,16 @@ interface WeatherAPI {
         @Query("appid") apiKey: String,
         @Query("units") units: String,
         @Query("lang") language: String)
+            : Response<CurrentWeatherResponse>
 
-            : Response<WeatherResponse>
+    @GET("weather?")
+    suspend fun getWeatherByCoordinates(
+        @Query("lat") latitude: String,
+        @Query ("lon") longitude: String,
+        @Query ("appid") apiKey: String,
+        @Query ("units") units: String,
+        @Query ("lang") language: String
+    ) :  Response<CurrentWeatherResponse>
 
 
 }

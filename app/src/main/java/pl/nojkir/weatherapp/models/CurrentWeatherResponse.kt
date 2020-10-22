@@ -1,6 +1,6 @@
 package pl.nojkir.weatherapp.models
 
-data class WeatherResponse(
+data class CurrentWeatherResponse(
     val base: String,
     val clouds: Clouds,
     val cod: Int,

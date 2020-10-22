@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class WeatherRepository @Inject constructor(private val weatherAPI: WeatherAPI){
+class CurrentWeatherRepository @Inject constructor(private val weatherAPI: WeatherAPI){
 
    suspend fun getWeatherByCityName(
         cityname: String,
@@ -14,5 +14,13 @@ class WeatherRepository @Inject constructor(private val weatherAPI: WeatherAPI){
         units: String,
         language: String
     ) = weatherAPI.getWeatherByCityName(cityname, apiKey, units, language)
+
+    suspend fun getWeatherByCoordinates(
+        latitude: String,
+        longitude: String,
+        apiKey: String,
+        units: String,
+        language: String
+    ) = weatherAPI.getWeatherByCoordinates(latitude, longitude, apiKey, units, language)
 
 }
