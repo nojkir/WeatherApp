@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import pl.nojkir.repository.UserPreferencesRepository
 import pl.nojkir.weatherapp.ui.api.CurrentWeatherAPI
 import pl.nojkir.weatherapp.ui.api.ForecastWeatherAPI
 import retrofit2.Retrofit
@@ -34,6 +35,8 @@ object AppModule {
 
     fun provideForecastApi(retrofit: Retrofit) : ForecastWeatherAPI =
         retrofit.create(ForecastWeatherAPI:: class.java)
+
+
 
 
 }
