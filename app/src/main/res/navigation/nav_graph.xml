@@ -7,7 +7,11 @@
     <fragment
         android:id="@+id/weatherFragment"
         android:name="pl.nojkir.weatherapp.ui.WeatherFragment"
-        android:label="WeatherFragment" />
+        android:label="WeatherFragment" >
+        <action
+            android:id="@+id/action_weatherFragment_to_fiveDaysFragment"
+            app:destination="@id/fiveDaysFragment" />
+    </fragment>
     <fragment
         android:id="@+id/fiveDaysFragment"
         android:name="pl.nojkir.weatherapp.ui.FiveDaysFragment"

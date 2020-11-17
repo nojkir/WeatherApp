@@ -1,48 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:paddingBottom="12dp">
 
-    <TextView
-        android:id="@+id/textView_temperature"
-        android:layout_width="85dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="104dp"
-        android:layout_marginTop="28dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView_wind"
-        android:layout_width="76dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="116dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView_weatherIcon"
-        android:layout_width="73dp"
-        android:layout_height="52dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="@color/semiTransparentColor"
+        app:cardCornerRadius="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_02d" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textView_humidity"
-        android:layout_width="78dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="68dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+
+
+            <ImageView
+                android:id="@+id/imageView_weatherIcon"
+                android:layout_width="53dp"
+                android:layout_height="59dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="28dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.75"
+                app:layout_constraintStart_toEndOf="@+id/tV_Date"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_02d" />
+
+            <TextView
+                android:id="@+id/tV_pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="44dp"
+                android:text="TextView"
+                android:textColor="@color/fiveDaysFragmentTextColor"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tV_temperature" />
+
+            <TextView
+                android:id="@+id/tV_Date"
+                android:layout_width="94dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="28dp"
+                android:text="Poniedziałek"
+                android:textSize="15sp"
+                android:textColor="@color/fiveDaysFragmentTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tV_sunrise"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="44dp"
+                android:textSize="15sp"
+                android:text="TextView"
+                android:textColor="@color/fiveDaysFragmentTextColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tV_temperature" />
+
+            <TextView
+                android:id="@+id/tV_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="44dp"
+                android:textSize="15sp"
+                android:textColor="@color/fiveDaysFragmentTextColor"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tV_pressure" />
+
+            <TextView
+                android:id="@+id/tV_sunset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:layout_marginEnd="44dp"
+                android:textSize="15sp"
+                android:textColor="@color/fiveDaysFragmentTextColor"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tV_sunrise" />
+
+            <TextView
+                android:id="@+id/tV_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:textColor="@color/fiveDaysFragmentTextColor"
+                android:textSize="15sp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tV_Date" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

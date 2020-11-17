@@ -22,7 +22,7 @@
 
 
     <TextView
-        android:id="@+id/textView_temperature"
+        android:id="@+id/textViewTemperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
@@ -135,7 +135,7 @@
                 app:srcCompat="@drawable/ic_pressure" />
 
             <TextView
-                android:id="@+id/textView_pressure"
+                android:id="@+id/textViewPressure"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -188,12 +188,11 @@
         android:id="@+id/textView_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="44dp"
         android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_weatherIcon"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_temperature" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTemperature" />
 
     <ImageView
         android:id="@+id/imageView_weatherIcon"
@@ -204,6 +203,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_cityName"
         app:srcCompat="@drawable/ic_02d" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_localization"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="36dp"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        app:rippleColor="@null"
+        app:backgroundTint="@null"
+        android:background="@null"
+        android:backgroundTint="@color/backgroundTransparent"
+        android:outlineProvider="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_location" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

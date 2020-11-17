@@ -2,18 +2,17 @@ package pl.nojkir.weatherapp.ui
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import im.delight.android.location.SimpleLocation
+import pl.nojkir.repository.UserPreferencesRepository
 import pl.nojkir.weatherapp.R
 import pl.nojkir.weatherapp.databinding.FragmentWeatherBinding
-import pl.nojkir.weatherapp.ui.util.GpsUtility
-import pl.nojkir.weatherapp.ui.util.Resource
-import pl.nojkir.weatherapp.ui.util.setBackgroundResource
-import pl.nojkir.weatherapp.ui.util.setImageResource
+import pl.nojkir.weatherapp.ui.util.*
 import pl.nojkir.weatherapp.ui.viewModels.CurrentWeatherViewModel
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -32,6 +31,8 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
     private val binding get() = _binding!!
     private val viewModel: CurrentWeatherViewModel by viewModels()
     private lateinit var location: SimpleLocation
+
+
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,21 +66,17 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
 
 
 
-
-
-
         viewModel.coordCurrentWeather.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Resource.Success -> {
-                    Thread.sleep(1000)
                     binding.textViewCityName.text = response.data?.name
                     binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
-                        timeConverter(
+                        timeConverterToMinutes(
                             it, response.data.timezone.toLong()
                         )
                     }
                     binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
-                        timeConverter(
+                        timeConverterToMinutes(
                             it, response.data.timezone.toLong()
                         )
                     }
@@ -99,42 +96,47 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
 
                 }
                 is Resource.Loading -> {
-                    binding.textViewCityName.text = "Loading"
+                    Log.d("WeatherFragment", response.messge)
                 }
+
+                is Resource.Error -> {
+                    Log.d("WeatherFragment", response.messge)
+                }
+
             }
         })
 
-        viewModel.currentWeather.observe(viewLifecycleOwner,  { response ->
-            when (response) {
-                is Resource.Success -> {
-                    binding.textViewCityName.text = response.data?.name
-                    binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
-                        timeConverter(
-                            it, response.data.timezone.toLong()
-                        )
-                    }
-                    binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
-                        timeConverter(
-                            it, response.data.timezone.toLong()
-                        )
-                    }
-                    binding.textViewPressure.text = response.data?.main?.pressure.toString()
-                    binding.textViewWind.text = response.data?.wind?.speed.toString()
-                    binding.textViewTemperature.text =
-                        response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
-                    binding.textViewDescription.text = response.data?.weather?.get(0)?.description
-                    setImageResource(
-                        binding.imageViewWeatherIcon,
-                        response.data?.weather?.get(0)?.icon.toString()
-                    )
-                    setBackgroundResource(
-                        binding.root,
-                        response.data?.weather?.get(0)?.icon.toString()
-                    )
-
-                }
-            }
-        })
+//        viewModel.currentWeather.observe(viewLifecycleOwner,  { response ->
+//            when (response) {
+//                is Resource.Success -> {
+//                    binding.textViewCityName.text = response.data?.name
+//                    binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
+//                        timeConverterToMinutes(
+//                            it, response.data.timezone.toLong()
+//                        )
+//                    }
+//                    binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
+//                        timeConverterToMinutes(
+//                            it, response.data.timezone.toLong()
+//                        )
+//                    }
+//                    binding.textViewPressure.text = response.data?.main?.pressure.toString()
+//                    binding.textViewWind.text = response.data?.wind?.speed.toString()
+//                    binding.textViewTemperature.text =
+//                        response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
+//                    binding.textViewDescription.text = response.data?.weather?.get(0)?.description
+//                    setImageResource(
+//                        binding.imageViewWeatherIcon,
+//                        response.data?.weather?.get(0)?.icon.toString()
+//                    )
+//                    setBackgroundResource(
+//                        binding.root,
+//                        response.data?.weather?.get(0)?.icon.toString()
+//                    )
+//
+//                }
+//            }
+//        })
 
         setHasOptionsMenu(true)
     }
@@ -145,13 +147,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
         _binding = null
     }
 
-    fun timeConverter(time: Long, timezone: Long): String {
-        val converter = SimpleDateFormat("hh:mm a")
-        val convertedTime = converter.format(Date(time * 1000 + timezone * 1000))
 
-        return convertedTime
-
-    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_city_weather, menu)
