@@ -5,24 +5,34 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import pl.nojkir.repository.UserPreferencesRepository
 import pl.nojkir.weatherapp.data.ForecastWeatherRepository
-import pl.nojkir.weatherapp.models.forecastWeather.ForecastWeatherResponse
+import pl.nojkir.weatherapp.models.oneCallWeather.OneCallResponse
 import pl.nojkir.weatherapp.ui.util.Resource
 import retrofit2.Response
+import kotlin.coroutines.coroutineContext
 
 class ForecastWeatherViewModel @ViewModelInject constructor(
     private val forecastWeatherRepository: ForecastWeatherRepository
 ) : ViewModel(){
 
-    var forecastWeather : MutableLiveData<Resource<ForecastWeatherResponse>> = MutableLiveData()
+    init {
+        getForecastForCityName(
+            "3801ab2cbebba5f25d7fcd4d73c46273","50.2974884" ,"18.9545728", "metric", "pl")
+    }
 
-    fun getForecastForCityName(cityName: String, apiKey: String, numberOfDays: Int, units: String, language: String) = viewModelScope.launch {
-        val response = forecastWeatherRepository.getForecastByCityName(cityName, apiKey, numberOfDays, units, language)
+
+
+    var forecastWeather : MutableLiveData <Resource<OneCallResponse>> = MutableLiveData()
+
+    private fun getForecastForCityName(apiKey: String, latitude: String, longitude: String, units: String, language: String) = viewModelScope.launch {
+        val response = forecastWeatherRepository.getForecastByCityName( apiKey,latitude, longitude,  units, language)
 
             forecastWeather.postValue(handleForecastResponse(response))
     }
 
-    fun handleForecastResponse(response: Response<ForecastWeatherResponse>) : Resource<ForecastWeatherResponse> {
+    private fun handleForecastResponse(response: Response<OneCallResponse>) : Resource<OneCallResponse> {
         if (response.isSuccessful){
             response.body()?.let { forecastWeatherResponse ->
                 return Resource.Success(forecastWeatherResponse)

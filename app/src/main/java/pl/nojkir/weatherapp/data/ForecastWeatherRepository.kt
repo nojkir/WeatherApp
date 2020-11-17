@@ -8,11 +8,11 @@ class ForecastWeatherRepository @Inject constructor(
 ) {
 
     suspend fun getForecastByCityName(
-        cityName: String,
         apiKey: String,
-        numberOfDays: Int,
+        longitude: String,
+        latitude: String,
         units: String,
         language: String
-    ) = forecastWeatherAPI.getForecastByCityName(cityName, apiKey, numberOfDays, units, language)
+    ) = forecastWeatherAPI.getForecastByCityName( apiKey, longitude,latitude, units, language)
 
 }

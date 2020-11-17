@@ -3,9 +3,11 @@ package pl.nojkir.weatherapp.ui.util
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import pl.nojkir.weatherapp.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-    fun setImageResource(imageView: ImageView, url:String){
+fun setImageResource(imageView: ImageView, url:String){
         when(url){
             "01d" -> imageView.setImageResource(R.drawable.ic_01d)
             "01n" -> imageView.setImageResource(R.drawable.ic_01n)
@@ -55,4 +57,31 @@ fun setBackgroundResource(constraintLayout: ConstraintLayout, url:String){
 
     }
 
+
 }
+
+fun timeConverterToMinutes(time: Long, timezone: Long): String {
+    val converter = SimpleDateFormat("hh:mm a")
+    val convertedTime = converter.format(Date(time * 1000 + timezone * 1000))
+
+    return convertedTime
+
+}
+
+fun timeConverterToDate(time: Long, timezone: Long ): String {
+    val converter = SimpleDateFormat("MMM d")
+    val convertedTime = converter.format(Date(time * 1000 ))
+
+    return convertedTime
+
+}
+
+fun timeConverterToDayOfWeek(time: Long, timezone: Long ): String {
+    val converter = SimpleDateFormat("EEE")
+    val convertedTime = converter.format(Date(time * 1000 ))
+
+    return convertedTime
+
+}
+
+

@@ -27,6 +27,7 @@ class CurrentWeatherViewModel @ViewModelInject constructor(
 
     }
 
+
     val currentWeather : MutableLiveData<Resource<CurrentWeatherResponse>> = MutableLiveData()
     val coordCurrentWeather: MutableLiveData<Resource<CurrentWeatherResponse>> = MutableLiveData()
 
