@@ -1,0 +1,46 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/city_header">
+
+        <SwitchPreferenceCompat
+            app:key = "default_city_check_box"
+            app:title="@string/default_city_check_box"
+            app:defaultValue="false"
+            />
+        <EditTextPreference
+            android:dependency="default_city_check_box"
+            app:key="location"
+            app:title="@string/city_title"
+            app:isPreferenceVisible="true"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/language">
+
+        <ListPreference
+            app:entries="@array/language_entries"
+            app:entryValues="@array/language_values"
+            android:defaultValue="English_value"
+            app:key="language"
+            app:title="@string/reply_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>
+
+
+
+    <PreferenceCategory app:title="@string/units_header">
+
+        <ListPreference
+            app:entries="@array/units_entries"
+            app:entryValues="@array/units_values"
+            android:defaultValue="Metric"
+            app:key="units"
+            app:title = "@string/units_title"
+            app:defaultValue="Metric_value"
+            app:useSimpleSummaryProvider="true"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

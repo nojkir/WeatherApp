@@ -19,13 +19,10 @@ const val USER_PREFERENCES = "user_preferences"
 class UserPreferencesRepository(context: Context) {
 
     private val applicationContext = context.applicationContext
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences> = context.createDataStore(
+        name = USER_PREFERENCES
+    )
 
-    init {
-        dataStore= context.createDataStore(
-            name = USER_PREFERENCES
-        )
-    }
     companion object PreferencesKeys{
         val CITY= preferencesKey<String>("city")
     }

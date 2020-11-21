@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/settings"
-        android:title="Settings"
-        android:icon="@drawable/ic_settings"/>
+    <item android:id="@+id/weatherFragment"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+
+
 
     <item android:id="@+id/fiveDaysFragment"
         android:title="5 days"
         android:icon="@drawable/ic_five_days"/>
 
-    <item android:id="@+id/weatherFragment"
-        android:title="Home"
-        android:icon="@drawable/ic_home"/>
+    <item android:id="@+id/preferencesFragment"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"/>
+
+
 
 </menu>

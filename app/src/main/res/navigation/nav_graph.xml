@@ -16,4 +16,12 @@
         android:id="@+id/fiveDaysFragment"
         android:name="pl.nojkir.weatherapp.ui.FiveDaysFragment"
         android:label="FiveDaysFragment" />
+    <fragment
+        android:id="@+id/settingFragment"
+        android:name="pl.nojkir.weatherapp.ui.SettingsFragment"
+        android:label="SettingFragment" />
+    <fragment
+        android:id="@+id/preferencesFragment"
+        android:name="pl.nojkir.weatherapp.ui.PreferencesFragment"
+        android:label="PreferencesFragment" />
 </navigation>

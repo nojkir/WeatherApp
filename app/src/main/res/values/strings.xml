@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <!-- Preference Titles -->
+    <string name="city_header">Your default location</string>
+    <string name="units_header">Units</string>
+
+    <!-- Messages Preferences -->
+    <string name="city_title">Default location</string>
+    <string name="reply_title">Language</string>
+
+    <!-- Sync Preferences -->
+
+    <string name="language">Choose language</string>
+    <string name="units_title">Choose units</string>
+    <string name="default_city_check_box">Always find default location</string>
 </resources>
