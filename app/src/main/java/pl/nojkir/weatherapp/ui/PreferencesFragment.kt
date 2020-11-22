@@ -11,9 +11,5 @@ class PreferencesFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
 
-        val defaultLocation: SwitchPreferenceCompat? = findPreference("default_city_check_box")
-        val defaultLocationEt: EditTextPreference? = findPreference("location")
-
-
     }
 }

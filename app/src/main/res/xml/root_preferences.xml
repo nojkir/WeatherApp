@@ -6,7 +6,7 @@
         <SwitchPreferenceCompat
             app:key = "default_city_check_box"
             app:title="@string/default_city_check_box"
-            app:defaultValue="false"
+
             />
         <EditTextPreference
             android:dependency="default_city_check_box"

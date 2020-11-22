@@ -17,15 +17,12 @@ class CurrentWeatherViewModel @ViewModelInject constructor(
     var latitude: String = ""
     var longitude: String = ""
     var apiKey = "f180eb8998a971182830813353320521"
-    var units = "metric"
-    var language = "pl"
-    var cityName = "Chorzów"
+    var units = ""
+    var language = ""
+    var cityName = ""
+    var deafultLocationEnabled = false
 
-    init {
-//        getWeatherByCityName(cityName, apiKey, units, language)
-        getWeatherByCoordinates(latitude, longitude, apiKey, units, language)
 
-    }
 
 
     val currentWeather : MutableLiveData<Resource<CurrentWeatherResponse>> = MutableLiveData()

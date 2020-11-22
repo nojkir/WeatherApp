@@ -5,20 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import pl.nojkir.repository.UserPreferencesRepository
 import pl.nojkir.weatherapp.data.ForecastWeatherRepository
 import pl.nojkir.weatherapp.models.oneCallWeather.OneCallResponse
 import pl.nojkir.weatherapp.ui.util.Resource
 import retrofit2.Response
-import kotlin.coroutines.coroutineContext
 
 class ForecastWeatherViewModel @ViewModelInject constructor(
     private val forecastWeatherRepository: ForecastWeatherRepository
 ) : ViewModel(){
 
     init {
-        getForecastForCityName(
+        getForecastByCoordinates(
             "3801ab2cbebba5f25d7fcd4d73c46273","50.2974884" ,"18.9545728", "metric", "pl")
     }
 
@@ -26,7 +23,7 @@ class ForecastWeatherViewModel @ViewModelInject constructor(
 
     var forecastWeather : MutableLiveData <Resource<OneCallResponse>> = MutableLiveData()
 
-    private fun getForecastForCityName(apiKey: String, latitude: String, longitude: String, units: String, language: String) = viewModelScope.launch {
+    private fun getForecastByCoordinates(apiKey: String, latitude: String, longitude: String, units: String, language: String) = viewModelScope.launch {
         val response = forecastWeatherRepository.getForecastByCityName( apiKey,latitude, longitude,  units, language)
 
             forecastWeather.postValue(handleForecastResponse(response))
