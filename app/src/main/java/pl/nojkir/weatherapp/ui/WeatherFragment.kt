@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -19,8 +18,6 @@ import pl.nojkir.weatherapp.ui.util.*
 import pl.nojkir.weatherapp.ui.viewModels.CurrentWeatherViewModel
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -54,42 +51,11 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
                 viewModel.units,
                 viewModel.language
             )
-            viewModel.currentWeather.observe(viewLifecycleOwner,  { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        weatherfragment_progressBar.visibility = View.GONE
-                        binding.textViewCityName.text = response.data?.name
-                        binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
-                            timeConverterToMinutes(
-                                it, response.data.timezone.toLong()
-                            )
-                        }
-                        binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
-                            timeConverterToMinutes(
-                                it, response.data.timezone.toLong()
-                            )
-                        }
-                        binding.textViewPressure.text = response.data?.main?.pressure.toString()
-                        binding.textViewWind.text = response.data?.wind?.speed.toString()
-                        binding.textViewTemperature.text = if (viewModel.units == "metric") response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
-                        else response.data?.main?.temp?.let { Math.round(it).toString() } + "°F"
+            getCurrentWeatherByCityName()
 
-                        binding.textViewDescription.text = response.data?.weather?.get(0)?.description
-                        setImageResource(
-                            binding.imageViewWeatherIcon,
-                            response.data?.weather?.get(0)?.icon.toString()
-                        )
-                        setBackgroundResource(
-                            binding.root,
-                            response.data?.weather?.get(0)?.icon.toString()
-                        )
-
-                    }
-                }
-            })
 
         }else {
-            Toast.makeText(requireContext(), "Disabled ${viewModel.cityName} ", Toast.LENGTH_LONG).show()
+
             viewModel.longitude = location.longitude.toString()
             viewModel.latitude = location.latitude.toString()
 
@@ -98,56 +64,9 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
                 viewModel.units,
                 viewModel.language
             )
-            viewModel.coordCurrentWeather.observe(viewLifecycleOwner, { response ->
-                when (response) {
-                    is Resource.Success -> {
-                        weatherfragment_progressBar.visibility = View.GONE
-                        binding.textViewCityName.text = response.data?.name
-                        binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
-                            timeConverterToMinutes(
-                                it, response.data.timezone.toLong()
-                            )
-                        }
-                        binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
-                            timeConverterToMinutes(
-                                it, response.data.timezone.toLong()
-                            )
-                        }
-                        binding.textViewPressure.text = response.data?.main?.pressure.toString()
-                        binding.textViewWind.text = response.data?.wind?.speed.toString()
-                        binding.textViewTemperature.text = if (viewModel.units == "metric") response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
-                        else response.data?.main?.temp?.let { Math.round(it).toString() } + "°F"
-
-                        binding.textViewDescription.text = response.data?.weather?.get(0)?.description
-                        setImageResource(
-                            binding.imageViewWeatherIcon,
-                            response.data?.weather?.get(0)?.icon.toString()
-                        )
-                        setBackgroundResource(
-                            binding.root,
-                            response.data?.weather?.get(0)?.icon.toString()
-                        )
-
-                    }
-                    is Resource.Loading -> {
-                        weatherfragment_progressBar.visibility = View.VISIBLE
-                        Log.d("WeatherFragment", response.messge)
-                    }
-
-                    is Resource.Error -> {
-                        weatherfragment_progressBar.visibility = View.GONE
-                        Log.d("WeatherFragment", response.messge)
-                    }
-
-                }
-            })
+            getCurentWeatherByCoordinates()
 
         }
-
-
-
-
-
 
             fab_localization.setOnClickListener {
                 viewModel.getWeatherByCoordinates("50.297488", "18.954572",
@@ -155,58 +74,98 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
                     viewModel.units,
                     viewModel.language
                 )
-                viewModel.coordCurrentWeather.observe(viewLifecycleOwner, { response ->
-                when (response) {
-                    is Resource.Success -> {
+                getCurentWeatherByCoordinates()
 
-                        weatherfragment_progressBar.visibility = View.GONE
-                        binding.textViewCityName.text = response.data?.name
-                        binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
-                            timeConverterToMinutes(
-                                it, response.data.timezone.toLong()
-                            )
-                        }
-                        binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
-                            timeConverterToMinutes(
-                                it, response.data.timezone.toLong()
-                            )
-                        }
-                        binding.textViewPressure.text = response.data?.main?.pressure.toString()
-                        binding.textViewWind.text = response.data?.wind?.speed.toString()
-                        binding.textViewTemperature.text = if (viewModel.units == "metric") response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
-                        else response.data?.main?.temp?.let { Math.round(it).toString() } + "°F"
-
-                        binding.textViewDescription.text = response.data?.weather?.get(0)?.description
-                        setImageResource(
-                            binding.imageViewWeatherIcon,
-                            response.data?.weather?.get(0)?.icon.toString()
-                        )
-                        setBackgroundResource(
-                            binding.root,
-                            response.data?.weather?.get(0)?.icon.toString()
-                        )
-
-                    }
-                    is Resource.Loading -> {
-                        weatherfragment_progressBar.visibility = View.VISIBLE
-                        Log.d("WeatherFragment", response.messge)
-                    }
-
-                    is Resource.Error -> {
-                        weatherfragment_progressBar.visibility = View.GONE
-                        Log.d("WeatherFragment", response.messge)
-                    }
-
-                }
-            }) }
-
-
-
+            }
 
 
 
         setHasOptionsMenu(true)
     }
+    private fun getCurrentWeatherByCityName(){
+        viewModel.currentWeather.observe(viewLifecycleOwner,  { response ->
+            when (response) {
+                is Resource.Success -> {
+                    weatherfragment_progressBar.visibility = View.GONE
+                    binding.textViewCityName.text = response.data?.name
+                    binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
+                        timeConverterToMinutes(
+                            it, response.data.timezone.toLong()
+                        )
+                    }
+                    binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
+                        timeConverterToMinutes(
+                            it, response.data.timezone.toLong()
+                        )
+                    }
+                    binding.textViewPressure.text = response.data?.main?.pressure.toString()
+                    binding.textViewWind.text = response.data?.wind?.speed.toString()
+                    binding.textViewTemperature.text = if (viewModel.units == "metric") response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
+                    else response.data?.main?.temp?.let { Math.round(it).toString() } + "°F"
+
+                    binding.textViewDescription.text = response.data?.weather?.get(0)?.description
+                    setImageResource(
+                        binding.imageViewWeatherIcon,
+                        response.data?.weather?.get(0)?.icon.toString()
+                    )
+                    setBackgroundResource(
+                        binding.root,
+                        response.data?.weather?.get(0)?.icon.toString()
+                    )
+
+                }
+            }
+        })
+    }
+
+    private fun getCurentWeatherByCoordinates(){
+        viewModel.coordCurrentWeather.observe(viewLifecycleOwner, { response ->
+            when (response) {
+                is Resource.Success -> {
+
+                    weatherfragment_progressBar.visibility = View.GONE
+                    binding.textViewCityName.text = response.data?.name
+                    binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
+                        timeConverterToMinutes(
+                            it, response.data.timezone.toLong()
+                        )
+                    }
+                    binding.textViewSunset.text = response.data?.sys?.sunset?.toLong()?.let {
+                        timeConverterToMinutes(
+                            it, response.data.timezone.toLong()
+                        )
+                    }
+                    binding.textViewPressure.text = response.data?.main?.pressure.toString()
+                    binding.textViewWind.text = response.data?.wind?.speed.toString()
+                    binding.textViewTemperature.text = if (viewModel.units == "metric") response.data?.main?.temp?.let { Math.round(it).toString() } + "°C"
+                    else response.data?.main?.temp?.let { Math.round(it).toString() } + "°F"
+
+                    binding.textViewDescription.text = response.data?.weather?.get(0)?.description
+                    setImageResource(
+                        binding.imageViewWeatherIcon,
+                        response.data?.weather?.get(0)?.icon.toString()
+                    )
+                    setBackgroundResource(
+                        binding.root,
+                        response.data?.weather?.get(0)?.icon.toString()
+                    )
+
+                }
+                is Resource.Loading -> {
+                    weatherfragment_progressBar.visibility = View.VISIBLE
+                    Log.d("WeatherFragment", response.messge)
+                }
+
+                is Resource.Error -> {
+                    weatherfragment_progressBar.visibility = View.GONE
+                    Log.d("WeatherFragment", response.messge)
+                }
+
+            }
+        }) }
+
+
+
 
 
     private fun settings(){
@@ -239,6 +198,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
                         viewModel.units,
                         viewModel.language
                     )
+                    getCurrentWeatherByCityName()
                     searchView.clearFocus()
                 }
                 return true
