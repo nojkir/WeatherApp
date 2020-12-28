@@ -33,7 +33,5 @@ i
 9app/src/main/java/pl/nojkir/weatherapp/ui/MainActivity.kt,4\9\494a80fcc6843d9a1cba7d858357107f0383531a
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-s
-Capp/src/main/java/pl/nojkir/repository/UserPreferencesRepository.kt,3\a\3a4ebd8e028836a4e1c0ce92647c2c69cfa34fbb
-m
-=app/src/main/java/pl/nojkir/weatherapp/ui/SettingsFragment.kt,6\b\6b68313df2048ba756c9dcdc2ca9f7401f2907c4
+P
+ app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e

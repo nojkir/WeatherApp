@@ -12,7 +12,7 @@ import androidx.preference.PreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import im.delight.android.location.SimpleLocation
 import kotlinx.android.synthetic.main.fragment_weather.*
-import pl.nojkir.repository.UserPreferencesRepository
+
 import pl.nojkir.weatherapp.R
 import pl.nojkir.weatherapp.databinding.FragmentWeatherBinding
 import pl.nojkir.weatherapp.ui.util.*
@@ -57,6 +57,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
             viewModel.currentWeather.observe(viewLifecycleOwner,  { response ->
                 when (response) {
                     is Resource.Success -> {
+                        weatherfragment_progressBar.visibility = View.GONE
                         binding.textViewCityName.text = response.data?.name
                         binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
                             timeConverterToMinutes(
@@ -100,6 +101,7 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
             viewModel.coordCurrentWeather.observe(viewLifecycleOwner, { response ->
                 when (response) {
                     is Resource.Success -> {
+                        weatherfragment_progressBar.visibility = View.GONE
                         binding.textViewCityName.text = response.data?.name
                         binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
                             timeConverterToMinutes(
@@ -128,10 +130,12 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
 
                     }
                     is Resource.Loading -> {
+                        weatherfragment_progressBar.visibility = View.VISIBLE
                         Log.d("WeatherFragment", response.messge)
                     }
 
                     is Resource.Error -> {
+                        weatherfragment_progressBar.visibility = View.GONE
                         Log.d("WeatherFragment", response.messge)
                     }
 
@@ -154,6 +158,8 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
                 viewModel.coordCurrentWeather.observe(viewLifecycleOwner, { response ->
                 when (response) {
                     is Resource.Success -> {
+
+                        weatherfragment_progressBar.visibility = View.GONE
                         binding.textViewCityName.text = response.data?.name
                         binding.textViewSunrise.text = response.data?.sys?.sunrise?.toLong()?.let {
                             timeConverterToMinutes(
@@ -182,10 +188,12 @@ class WeatherFragment : Fragment(R.layout.fragment_weather), EasyPermissions.Per
 
                     }
                     is Resource.Loading -> {
+                        weatherfragment_progressBar.visibility = View.VISIBLE
                         Log.d("WeatherFragment", response.messge)
                     }
 
                     is Resource.Error -> {
+                        weatherfragment_progressBar.visibility = View.GONE
                         Log.d("WeatherFragment", response.messge)
                     }
 

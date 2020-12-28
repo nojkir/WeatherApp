@@ -45,6 +45,7 @@ class FiveDaysFragment : Fragment(R.layout.fivedays_fragment) {
                     is Resource.Success -> {
                         response.data?.let { oneCallResponse ->
 
+                            fivedays_progressbar.visibility = View.GONE
                             handlingUI(oneCallResponse, 0, binding.fiveDaysTemperature, binding.fiveDays1day, binding.fiveDays1date, binding.imageView2)
                             handlingUI(oneCallResponse, 1, binding.fiveDaysTemperature2, binding.fiveDays2day, binding.fiveDays2date, binding.imageView3)
                             handlingUI(oneCallResponse, 2, binding.fiveDaysTemperature3, binding.fiveDays3day, binding.fiveDays3date, binding.imageView4)
@@ -66,10 +67,12 @@ class FiveDaysFragment : Fragment(R.layout.fivedays_fragment) {
                     }
                     is Resource.Error -> {
                         Log.d("FiveDaysFragment", response.messge)
+                        fivedays_progressbar.visibility = View.GONE
                     }
 
                     is Resource.Loading -> {
                         Log.d("FiveDaysFragment", response.messge)
+                        fivedays_progressbar.visibility = View.VISIBLE
 
                     }
                 }
